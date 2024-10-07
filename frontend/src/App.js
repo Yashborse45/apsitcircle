@@ -1,19 +1,19 @@
-import logo from "./logo.svg";
-import React, { createContext, useState } from "react";
-import "./App.css";
-import Navbar from "./components/Navbar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
-import Profie from "./components/Profie";
+import React, { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+import Category from "./components/Category";
 import Createpost from "./components/Createpost";
-import { LoginContext } from "./context/LoginContext";
+import Home from "./components/Home";
 import Modal from "./components/Modal";
-import UserProfie from "./components/UserProfile";
 import MyFolliwngPost from "./components/MyFollowingPost";
+import Navbar from "./components/Navbar";
+import Profie from "./components/Profie";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import UserProfie from "./components/UserProfile";
+import { LoginContext } from "./context/LoginContext";
 
 function App() {
   const [userLogin, setUserLogin] = useState(false);
@@ -25,6 +25,7 @@ function App() {
           <Navbar login={userLogin} />
           <Routes>
             <Route path="/" element={<Home />}></Route>
+            <Route path="/category" element={<Category />} />
             <Route path="/signup" element={<SignUp />}></Route>
             <Route path="/signin" element={<SignIn />}></Route>
             <Route exact path="/profile" element={<Profie />}></Route>

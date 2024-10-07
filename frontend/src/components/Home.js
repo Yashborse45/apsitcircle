@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./Home.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import "./Home.css";
 
 export default function Home() {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
@@ -40,11 +39,13 @@ export default function Home() {
   const toggleComment = (posts) => {
     if (show) {
       setShow(false);
+      setItem([]);
     } else {
       setShow(true);
-      setItem(posts);
+      setItem(posts); // Set the current post to display comments
     }
   };
+
 
   const likePost = (id) => {
     fetch("http://localhost:5000/like", {
@@ -140,7 +141,7 @@ export default function Home() {
               </div>
               <h5>
                 <Link to={`/profile/${posts.postedBy._id}`}>
-                  {posts.postedBy.name}
+                  {posts.postedBy.userName}
                 </Link>
               </h5>
             </div>

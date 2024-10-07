@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../img/logo.png";
 import "./SignUp.css";
-import { Link, useNavigate } from "react-router-dom";
 
 import { toast } from 'react-toastify';
 
@@ -26,7 +26,7 @@ export default function SignUp() {
       notifyA("Invalid email")
       return
     } else if (!passRegex.test(password)) {
-      notifyA("Password must contain at least 8 characters, including at least 1 number and 1 includes both lower and uppercase letters and special characters for example #,?,!")
+      notifyA("Password must contain at least 8 characters, including at least 1 number, and include both lower and uppercase letters and special characters (e.g., #, ?, !).");
       return
     }
 
@@ -61,7 +61,7 @@ export default function SignUp() {
         <div className="form">
           <img className="signUpLogo" src={logo} alt="" />
           <p className="loginPara">
-            Sign up to see photos and videos <br /> from your friends
+            Sign up to see photos from the community <br /> shared by your friends.
           </p>
           <div>
             <input type="email" name="email" id="email" value={email} placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} />
@@ -93,8 +93,7 @@ export default function SignUp() {
             className="loginPara"
             style={{ fontSize: "12px", margin: "3px 0px" }}
           >
-            By signing up, you agree to out Terms, <br /> privacy policy and
-            cookies policy.
+            By signing up, you agree to our Terms, <br /> Privacy Policy, and Cookies Policy.
           </p>
           <input type="submit" id="submit-btn" value="Sign Up" onClick={() => { postData() }} />
         </div>

@@ -1,5 +1,5 @@
-const mongoose = require("mongoose")
-const { ObjectId } = mongoose.Schema.Types
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 
 const postSchema = new mongoose.Schema({
     body: {
@@ -8,7 +8,12 @@ const postSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        require: true
+        required: true // Corrected from 'require' to 'required'
+    },
+    category: { // New category field
+        type: String,
+        enum: ["Sport", "Cultural"], // Enum to limit values
+        required: true // Optional: You can make it required or not based on your requirement
     },
     likes: [{ type: ObjectId, ref: "USER" }],
     comments: [{
@@ -19,6 +24,6 @@ const postSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "USER"
     }
-}, { timestamps: true })
+}, { timestamps: true });
 
-mongoose.model("POST", postSchema)
+mongoose.model("POST", postSchema);

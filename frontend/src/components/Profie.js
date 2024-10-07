@@ -58,7 +58,7 @@ export default function Profie() {
           />
         </div>
         {/* profile-data */}
-        <div className="pofile-data">
+        <div className="profile-data">
           <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
           <div className="profile-info" style={{ display: "flex" }}>
             <p>{pic ? pic.length : "0"} posts</p>

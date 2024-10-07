@@ -9,29 +9,36 @@ const POST = mongoose.model("POST")
 // Route
 router.get("/allposts", requireLogin, (req, res) => {
     POST.find()
-        .populate("postedBy", "_id name Photo")
+        .populate("postedBy", "_id userName Photo")
         .populate("comments.postedBy", "_id name")
         .sort("-createdAt")
         .then(posts => res.json(posts))
         .catch(err => console.log(err))
-})
+});
 
 router.post("/createPost", requireLogin, (req, res) => {
-    const { body, pic } = req.body;
-    console.log(pic)
-    if (!body || !pic) {
-        return res.status(422).json({ error: "Please add all the fields" })
+    const { body, pic, category } = req.body; // Extracting category
+    if (!body || !pic || !category) {  // Check if category is provided
+        return res.status(422).json({ error: "Please add all the fields" });
     }
-    console.log(req.user)
+
     const post = new POST({
         body,
         photo: pic,
-        postedBy: req.user
-    })
-    post.save().then((result) => {
-        return res.json({ post: result })
-    }).catch(err => console.log(err))
-})
+        category,  // Saving category in the post
+        postedBy: req.user,
+    });
+
+    post.save()
+        .then((result) => {
+            res.json({ post: result });
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).json({ error: "Failed to save post" });
+        });
+});
+
 
 router.get("/myposts", requireLogin, (req, res) => {
     POST.find({ postedBy: req.user._id })
